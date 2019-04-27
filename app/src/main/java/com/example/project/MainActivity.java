@@ -9,9 +9,6 @@ import android.widget.TextView;
 import android.view.KeyEvent;
 
 import java.security.Key;
-/*
-hello
- */
 
 public class MainActivity extends AppCompatActivity {
     TextView Answer;
@@ -21,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     int NumberOne;
     int NumberTwo;
     float solution;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberOne = Integer.parseInt(firstNumber.getText().toString());
-                NumberTwo = Integer.parseInt(secondNumber.getText().toString());
-                solution = NumberOne + NumberTwo;
-                Answer.setText(String.valueOf(solution));
+                if (firstNumber.equals("") || secondNumber.equals("")) {
+                    NumberOne = Integer.parseInt(firstNumber.getText().toString());
+                    NumberTwo = Integer.parseInt(secondNumber.getText().toString());
+                    solution = NumberOne + NumberTwo;
+                    Answer.setText(String.valueOf(solution));
+                }
             }
         });
 
@@ -79,11 +79,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             firstNumber.setText("");
             secondNumber.setText("");
             Answer.setText("");
             return true;
+        }
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            counter++;
+            if (counter % 2 == 0) {
+                secondNumber.setText(firstNumber.getText());
+                firstNumber.setText("");
+                Answer.setText("");
+            } else {
+                firstNumber.setText(Answer.getText());
+                secondNumber.setText("");
+                Answer.setText("");
+            }
         }
         return true;
     }
