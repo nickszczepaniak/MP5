@@ -13,7 +13,7 @@ import java.security.Key;
 public class MainActivity extends AppCompatActivity {
     TextView Answer;
     EditText firstNumber, secondNumber;
-    Button multiply, divide, add, subtract, square, root, clear;
+    Button multiply, divide, add, subtract, square, root, log, inverse, xn;
 
     float NumberOne;
     float NumberTwo;
@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         subtract = findViewById(R.id.subtract);
         square = findViewById(R.id.square);
         root = findViewById(R.id.root);
-        clear = findViewById(R.id.clear);
+        log = findViewById(R.id.log);
+        inverse = findViewById(R.id.inverse);
+        xn = findViewById(R.id.xn);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,12 +126,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        clear.setOnClickListener(new View.OnClickListener() {
+        log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstNumber.setText("");
-                secondNumber.setText("");
-                Answer.setText("");
+                if (firstNumber == null || firstNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    solution = (float) Math.log(NumberOne);
+                    Answer.setText(String.valueOf(solution));
+                }
+            }
+        });
+
+        inverse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firstNumber == null || firstNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    solution = 1 / NumberOne;
+                    Answer.setText(String.valueOf(solution));
+                }
+            }
+        });
+
+        xn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firstNumber == null || secondNumber == null
+                        || firstNumber.length() == 0 || secondNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    NumberTwo = Float.parseFloat(secondNumber.getText().toString());
+                    solution = (float) Math.pow(NumberOne, NumberTwo);
+                    Answer.setText(String.valueOf(solution));
+                }
             }
         });
     }
@@ -140,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
             Answer.setText("");
         }
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            secondNumber.setText(firstNumber.getText());
             firstNumber.setText("");
+            secondNumber.setText("");
             Answer.setText("");
         }
         return true;

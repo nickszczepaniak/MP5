@@ -29,45 +29,66 @@
         android:text="Answer" />
 
     <Button
-        android:id="@+id/multiply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Multiply" />
-
-    <Button
-        android:id="@+id/divide"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Divide" />
-
-    <Button
         android:id="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#7FAA85"
         android:text="Add" />
 
     <Button
         android:id="@+id/subtract"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#7FAA85"
         android:text="Subtract" />
 
     <Button
-        android:id="@+id/square"
+        android:id="@+id/multiply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Square" />
+        android:background="#7FAA85"
+        android:text="Multiply" />
+
+    <Button
+        android:id="@+id/divide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7FAA85"
+        android:text="Divide" />
 
     <Button
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#7FAA85"
         android:text="Root" />
 
     <Button
-        android:id="@+id/clear"
+        android:id="@+id/square"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear" />
+        android:background="#7FAA85"
+        android:text="Square" />
+
+    <Button
+        android:id="@+id/xn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7FAA85"
+        android:text="X^N" />
+
+    <Button
+        android:id="@+id/inverse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7FAA85"
+        android:text="Inverse" />
+
+    <Button
+        android:id="@+id/log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7FAA85"
+        android:text="Log" />
 
 </LinearLayout>
