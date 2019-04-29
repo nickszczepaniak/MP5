@@ -13,12 +13,11 @@ import java.security.Key;
 public class MainActivity extends AppCompatActivity {
     TextView Answer;
     EditText firstNumber, secondNumber;
-    Button multiply, divide, add, subtract;
+    Button multiply, divide, add, subtract, square, root, clear;
 
-    int NumberOne;
-    int NumberTwo;
+    float NumberOne;
+    float NumberTwo;
     float solution;
-    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +30,19 @@ public class MainActivity extends AppCompatActivity {
         divide = findViewById(R.id.divide);
         add = findViewById(R.id.add);
         subtract = findViewById(R.id.subtract);
+        square = findViewById(R.id.square);
+        root = findViewById(R.id.root);
+        clear = findViewById(R.id.clear);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (firstNumber.equals("") || secondNumber.equals("")) {
-                    NumberOne = Integer.parseInt(firstNumber.getText().toString());
-                    NumberTwo = Integer.parseInt(secondNumber.getText().toString());
+                if (firstNumber == null || secondNumber == null
+                        || firstNumber.length() == 0 || secondNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    NumberTwo = Float.parseFloat(secondNumber.getText().toString());
                     solution = NumberOne + NumberTwo;
                     Answer.setText(String.valueOf(solution));
                 }
@@ -47,55 +52,97 @@ public class MainActivity extends AppCompatActivity {
         subtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberOne = Integer.parseInt(firstNumber.getText().toString());
-                NumberTwo = Integer.parseInt(secondNumber.getText().toString());
-                solution = NumberOne - NumberTwo;
-                Answer.setText(String.valueOf(solution));
+                if (firstNumber == null || secondNumber == null
+                        || firstNumber.length() == 0 || secondNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    NumberTwo = Float.parseFloat(secondNumber.getText().toString());
+                    solution = NumberOne - NumberTwo;
+                    Answer.setText(String.valueOf(solution));
+                }
             }
         });
 
         multiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberOne = Integer.parseInt(firstNumber.getText().toString());
-                NumberTwo = Integer.parseInt(secondNumber.getText().toString());
-                solution = NumberOne * NumberTwo;
-                Answer.setText(String.valueOf(solution));
+                if (firstNumber == null || secondNumber == null
+                        || firstNumber.length() == 0 || secondNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    NumberTwo = Float.parseFloat(secondNumber.getText().toString());
+                    solution = NumberOne * NumberTwo;
+                    Answer.setText(String.valueOf(solution));
+                }
             }
         });
 
         divide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberOne = Integer.parseInt(firstNumber.getText().toString());
-                NumberTwo = Integer.parseInt(secondNumber.getText().toString());
-                if (NumberTwo == 0) {
-                    Answer.setText("YOU CANT DO THAT!");
+                if (firstNumber == null || secondNumber == null
+                        || firstNumber.length() == 0 || secondNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
                 } else {
-                    solution = NumberOne / NumberTwo;
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    NumberTwo = Float.parseFloat(secondNumber.getText().toString());
+                    if (NumberTwo == 0) {
+                        Answer.setText("YOU CANT DO THAT!");
+                    } else {
+                        solution = NumberOne / NumberTwo;
+                        Answer.setText(String.valueOf(solution));
+                    }
+                }
+            }
+        });
+
+        square.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firstNumber == null || firstNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    solution = NumberOne * NumberOne;
                     Answer.setText(String.valueOf(solution));
                 }
+            }
+        });
+
+        root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firstNumber == null || firstNumber.length() == 0) {
+                    Answer.setText("Your inputs are invalid");
+                } else {
+                    NumberOne = Float.parseFloat(firstNumber.getText().toString());
+                    solution = (float) Math.sqrt(NumberOne);
+                    Answer.setText(String.valueOf(solution));
+                }
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firstNumber.setText("");
+                secondNumber.setText("");
+                Answer.setText("");
             }
         });
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-            firstNumber.setText("");
+            firstNumber.setText(Answer.getText());
             secondNumber.setText("");
             Answer.setText("");
-            return true;
         }
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            counter++;
-            if (counter % 2 == 0) {
-                secondNumber.setText(firstNumber.getText());
-                firstNumber.setText("");
-                Answer.setText("");
-            } else {
-                firstNumber.setText(Answer.getText());
-                secondNumber.setText("");
-                Answer.setText("");
-            }
+            secondNumber.setText(firstNumber.getText());
+            firstNumber.setText("");
+            Answer.setText("");
         }
         return true;
     }
