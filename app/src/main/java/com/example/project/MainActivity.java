@@ -8,9 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.KeyEvent;
 
-import java.security.Key;
-
 public class MainActivity extends AppCompatActivity {
+
     TextView Answer;
     EditText firstNumber, secondNumber;
     Button multiply, divide, add, subtract, square, root, log, inverse, xn;
@@ -18,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     float NumberOne;
     float NumberTwo;
     float solution;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,14 +169,20 @@ public class MainActivity extends AppCompatActivity {
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-            firstNumber.setText(Answer.getText());
-            secondNumber.setText("");
-            Answer.setText("");
+            counter++;
+            if (counter % 2 == 0) {
+                secondNumber.setText(firstNumber.getText());
+                firstNumber.setText("");
+            } else {
+                firstNumber.setText(Answer.getText());
+                secondNumber.setText("");
+                Answer.setText("");
+            }
         }
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            firstNumber.setText("");
             secondNumber.setText("");
-            Answer.setText("");
+            firstNumber.setText("");
+            Answer.clearComposingText();
         }
         return true;
     }
